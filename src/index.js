@@ -5,7 +5,7 @@ import { ThemeProvider as StyledComponentsThemeProvider } from 'styled-component
 import {
   StylesProvider,
   ThemeProvider as MuiThemeProvider,
-  createMuiTheme,
+  unstable_createMuiStrictModeTheme as createMuiTheme, // for @material-ui/lab
 } from '@material-ui/core'
 import Layout from './Layout'
 
