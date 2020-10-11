@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { TextField, Button } from '@material-ui/core'
+import { useHistory } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import Form, { FormInputs, FormActions } from './Form'
 import signIn from '../api/signIn'
 import { store, actions } from '../redux'
@@ -9,7 +11,9 @@ const setCurrentUser = (username, token) => {
   store.dispatch(actions.setCurrentUser(username, token))
 }
 
-const SignInForm = () => {
+const SignInForm = ({ redirectTo }) => {
+  const history = useHistory()
+
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
@@ -26,6 +30,7 @@ const SignInForm = () => {
     if (result.success) {
       setCurrentUser(username, result.token)
       store.dispatch(actions.showAlert('success', 'Signed in successfully'))
+      history.push(redirectTo)
     } else if (result.validationErrors) {
       setValidationErrors(result.validationErrors)
     } else {
@@ -59,6 +64,12 @@ const SignInForm = () => {
       </FormActions>
     </Form>
   )
+}
+SignInForm.propTypes = {
+  redirectTo: PropTypes.string,
+}
+SignInForm.defaultProps = {
+  redirectTo: '/',
 }
 
 export default SignInForm
