@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container } from '@material-ui/core'
 import styled from 'styled-components'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import Header from './components/Header'
+import { Alert, Header } from './components'
 import { HomePage, SignInPage, NotFoundPage } from './pages'
 import { store, actions } from './redux'
+import equals from './utils/equals'
 
 const configureSession = () => {
   const session = JSON.parse(localStorage.getItem('userSession'))
@@ -34,6 +35,17 @@ const Pages = ({ children }) => {
 }
 
 const Layout = () => {
+  const [alert, setAlert] = useState(store.getState().alert)
+
+  const stateUpdateHandler = () => {
+    const updatedState = store.getState()
+    if (!equals(alert, updatedState.alert)) {
+      setAlert(updatedState.alert)
+    }
+  }
+
+  store.subscribe(stateUpdateHandler)
+
   useEffect(() => {
     configureSession()
   }, [])
@@ -48,6 +60,14 @@ const Layout = () => {
           <Route component={NotFoundPage} />
         </Pages>
       </Router>
+      <Alert
+        open={alert.open}
+        type={alert.type}
+        message={alert.message}
+        onClose={() => {
+          store.dispatch(actions.hideAlert())
+        }}
+      />
     </Wrapper>
   )
 }

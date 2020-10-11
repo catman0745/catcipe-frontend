@@ -12,9 +12,24 @@ const clearCurrentUser = () => ({
   type: actionTypes.CLEAR_CURRENT_USER,
 })
 
+const showAlert = (type, message) => ({
+  type: actionTypes.SHOW_ALERT,
+  payload: {
+    message,
+    type,
+  },
+})
+
+const hideAlert = () => ({
+  type: actionTypes.HIDE_ALERT,
+})
+
 const actions = {
   setCurrentUser,
   clearCurrentUser,
+
+  showAlert,
+  hideAlert,
 }
 
 export default actions
