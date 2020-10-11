@@ -1,20 +1,19 @@
 import React from 'react'
 import Grid from '@material-ui/core/Grid'
 import PropTypes from 'prop-types'
-import Recipe from './Recipe'
+import RecipeCard from './RecipeCard'
 
 const RecipeList = ({ recipes }) => {
   return (
-    <Grid container spacing={2} alignItems="stretch" justify="center">
+    <Grid container spacing={2} justify="center">
       {recipes.map((recipe) => (
         <Grid item key={recipe.id} xs={12} md={6} lg={4}>
-          <Recipe
+          <RecipeCard
             title={recipe.title}
             author={recipe.author}
             image={recipe.image}
             time={recipe.time}
             description={recipe.description}
-            stretch
           />
         </Grid>
       ))}

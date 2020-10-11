@@ -9,9 +9,10 @@ import {
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
-const RecipeCard = styled(Card)`
+const Container = styled(Card)`
   display: flex;
   flex-direction: column;
+  height: 100%;
 `
 
 const Image = styled(CardMedia)`
@@ -45,25 +46,21 @@ RecipeDescription.propTypes = {
   description: PropTypes.string.isRequired,
 }
 
-const Recipe = ({ title, author, image, description, time, stretch }) => {
+const RecipeCard = ({ title, author, image, description, time }) => {
   return (
-    <RecipeCard style={stretch ? { height: '100%' } : {}}>
+    <Container>
       <Header title={title} author={author} time={time} />
       <Image image={image} title={title} />
       <RecipeDescription description={description} />
-    </RecipeCard>
+    </Container>
   )
 }
-Recipe.propTypes = {
+RecipeCard.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
   time: PropTypes.number.isRequired,
-  stretch: PropTypes.bool,
-}
-Recipe.defaultProps = {
-  stretch: false,
 }
 
-export default Recipe
+export default RecipeCard
