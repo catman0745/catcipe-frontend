@@ -2,22 +2,12 @@ import React, { useState } from 'react'
 import { AppBar, Toolbar, Box, Typography } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { actions, store } from '../redux'
+import equals from '../utils/equals'
 import AccountControls from './AccountControls'
 
 const signOut = () => {
   localStorage.removeItem('userSession')
   store.dispatch(actions.clearCurrentUser())
-}
-
-const sessionsAreSame = (userSession, updatedSession) => {
-  if (userSession === undefined || updatedSession === undefined) {
-    return userSession === updatedSession
-  }
-
-  return (
-    userSession.username === updatedSession.username &&
-    userSession.token === updatedSession.token
-  )
 }
 
 const AppLogo = () => {
@@ -33,7 +23,7 @@ const Header = () => {
 
   const stateUpdateHandler = () => {
     const updatedState = store.getState()
-    if (!sessionsAreSame(userSession, updatedState.userSession)) {
+    if (!equals(userSession, updatedState.userSession)) {
       setUserSession(updatedState.userSession)
     }
   }
