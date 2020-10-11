@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
-import { AppBar, Toolbar, Typography, Button } from '@material-ui/core'
+import { AppBar, Toolbar, Box, Typography } from '@material-ui/core'
 import { Link } from 'react-router-dom'
-import styled from 'styled-components'
-import PropTypes from 'prop-types'
-import store from '../redux/store'
+import { actions, store } from '../redux'
+import AccountControls from './AccountControls'
+
+const signOut = () => {
+  localStorage.removeItem('userSession')
+  store.dispatch(actions.clearCurrentUser())
+}
 
 const sessionsAreSame = (userSession, updatedSession) => {
   if (userSession === undefined || updatedSession === undefined) {
@@ -24,28 +28,6 @@ const AppLogo = () => {
   )
 }
 
-const Spacer = styled.div`
-  flex-grow: 1;
-`
-
-const AccountControls = ({ username }) => {
-  if (username) {
-    return <Typography variant="subtitle1">Welcome {username}!</Typography>
-  }
-
-  return (
-    <Link to="/signin">
-      <Button variant="contained">Sign in</Button>
-    </Link>
-  )
-}
-AccountControls.propTypes = {
-  username: PropTypes.string,
-}
-AccountControls.defaultProps = {
-  username: '',
-}
-
 const Header = () => {
   const [userSession, setUserSession] = useState(store.getState().userSession)
 
@@ -61,9 +43,16 @@ const Header = () => {
   return (
     <AppBar position="static">
       <Toolbar>
-        <AppLogo />
-        <Spacer />
-        <AccountControls username={userSession && userSession.username} />
+        <Box display="flex" width={1}>
+          <AppLogo />
+          <Box flexGrow={1} />
+          <Box flexGrow={0}>
+            <AccountControls
+              username={userSession && userSession.username}
+              signOut={signOut}
+            />
+          </Box>
+        </Box>
       </Toolbar>
     </AppBar>
   )
