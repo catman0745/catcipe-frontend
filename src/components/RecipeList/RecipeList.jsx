@@ -3,23 +3,21 @@ import Grid from '@material-ui/core/Grid'
 import PropTypes from 'prop-types'
 import RecipeCard from './RecipeCard'
 
-const RecipeList = ({ recipes }) => {
-  return (
-    <Grid container spacing={2} justify="center">
-      {recipes.map((recipe) => (
-        <Grid item key={recipe.id} xs={12} md={6} lg={4}>
-          <RecipeCard
-            title={recipe.title}
-            author={recipe.author}
-            image={recipe.image}
-            time={recipe.time}
-            description={recipe.description}
-          />
-        </Grid>
-      ))}
-    </Grid>
-  )
-}
+const RecipeList = ({ recipes }) => (
+  <Grid container spacing={2} justify="center">
+    {recipes.map((recipe) => (
+      <Grid item key={recipe.id} xs={12} md={6} lg={4}>
+        <RecipeCard
+          title={recipe.title}
+          author={recipe.author}
+          image={recipe.image}
+          time={recipe.time}
+          description={recipe.description}
+        />
+      </Grid>
+    ))}
+  </Grid>
+)
 RecipeList.propTypes = {
   recipes: PropTypes.arrayOf(
     PropTypes.shape({

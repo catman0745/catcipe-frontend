@@ -2,9 +2,15 @@ import React from 'react'
 import { Grid, Button, Typography } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import Center from './Center'
+import Center from '../Center'
+import { actions, store } from '../../redux'
 
-const SignedControls = ({ username, signOut }) => (
+const signOut = () => {
+  localStorage.removeItem('userSession')
+  store.dispatch(actions.clearCurrentUser())
+}
+
+const SignedControls = ({ username }) => (
   <Grid container spacing={2}>
     <Grid item>
       <Center>
@@ -20,7 +26,6 @@ const SignedControls = ({ username, signOut }) => (
 )
 SignedControls.propTypes = {
   username: PropTypes.string.isRequired,
-  signOut: PropTypes.func.isRequired,
 }
 
 const SignControls = () => (
@@ -33,16 +38,11 @@ const SignControls = () => (
   </Grid>
 )
 
-const AccountControls = ({ username, signOut }) => {
-  if (username) {
-    return <SignedControls username={username} signOut={signOut} />
-  }
-
-  return <SignControls />
+const AccountControls = ({ username }) => {
+  return username ? <SignedControls username={username} /> : <SignControls />
 }
 AccountControls.propTypes = {
   username: PropTypes.string,
-  signOut: PropTypes.func.isRequired,
 }
 AccountControls.defaultProps = {
   username: '',

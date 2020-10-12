@@ -24,17 +24,15 @@ const PagesContainer = styled.div`
   flex-grow: 1;
 `
 
-const Pages = ({ children }) => {
-  return (
-    <PagesContainer>
-      <Container style={{ height: '100%' }}>
-        <Switch>{children}</Switch>
-      </Container>
-    </PagesContainer>
-  )
-}
+const Pages = ({ children }) => (
+  <PagesContainer>
+    <Container style={{ height: '100%' }}>
+      <Switch>{children}</Switch>
+    </Container>
+  </PagesContainer>
+)
 
-const Layout = () => {
+const App = () => {
   const [alert, setAlert] = useState(store.getState().alert)
 
   const stateUpdateHandler = () => {
@@ -72,4 +70,4 @@ const Layout = () => {
   )
 }
 
-export default Layout
+export default App

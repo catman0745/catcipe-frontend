@@ -1,12 +1,10 @@
 import React from 'react'
 import { SignInForm, Center } from '../components'
 
-const SignInPage = () => {
-  return (
-    <Center>
-      <SignInForm />
-    </Center>
-  )
-}
+const SignInPage = () => (
+  <Center>
+    <SignInForm />
+  </Center>
+)
 
 export default SignInPage

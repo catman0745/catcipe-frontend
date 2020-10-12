@@ -1,22 +1,15 @@
 import React, { useState } from 'react'
 import { AppBar, Toolbar, Box, Typography } from '@material-ui/core'
 import { Link } from 'react-router-dom'
-import { actions, store } from '../redux'
-import equals from '../utils/equals'
+import store from '../../redux/store'
+import equals from '../../utils/equals'
 import AccountControls from './AccountControls'
 
-const signOut = () => {
-  localStorage.removeItem('userSession')
-  store.dispatch(actions.clearCurrentUser())
-}
-
-const AppLogo = () => {
-  return (
-    <Link to="/">
-      <Typography variant="h6">Catcipe</Typography>
-    </Link>
-  )
-}
+const AppLogo = () => (
+  <Link to="/">
+    <Typography variant="h6">Catcipe</Typography>
+  </Link>
+)
 
 const Header = () => {
   const [userSession, setUserSession] = useState(store.getState().userSession)
@@ -37,10 +30,7 @@ const Header = () => {
           <AppLogo />
           <Box flexGrow={1} />
           <Box flexGrow={0}>
-            <AccountControls
-              username={userSession && userSession.username}
-              signOut={signOut}
-            />
+            <AccountControls username={userSession && userSession.username} />
           </Box>
         </Box>
       </Toolbar>

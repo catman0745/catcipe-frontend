@@ -12,16 +12,14 @@ const Container = styled(Card)`
   `}
 `
 
-const Form = ({ title, children }) => {
-  return (
-    <Container>
-      <FormSection justify="center">
-        <Typography variant="h4">{title}</Typography>
-      </FormSection>
-      {children}
-    </Container>
-  )
-}
+const Form = ({ title, children }) => (
+  <Container>
+    <FormSection justify="center">
+      <Typography variant="h4">{title}</Typography>
+    </FormSection>
+    {children}
+  </Container>
+)
 Form.propTypes = {
   title: PropTypes.string.isRequired,
 }
