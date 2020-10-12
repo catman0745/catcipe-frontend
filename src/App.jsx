@@ -3,7 +3,7 @@ import { Container } from '@material-ui/core'
 import styled from 'styled-components'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Alert, Header } from './components'
-import { HomePage, SignInPage, NotFoundPage } from './pages'
+import { HomePage, SignInPage, SignUpPage, NotFoundPage } from './pages'
 import { store, actions } from './redux'
 import equals from './utils/equals'
 
@@ -55,6 +55,7 @@ const App = () => {
         <Pages>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/signin" component={SignInPage} />
+          <Route exact path="/signup" component={SignUpPage} />
           <Route component={NotFoundPage} />
         </Pages>
       </Router>

@@ -35,6 +35,11 @@ const SignControls = () => (
         <Button variant="contained">Sign in</Button>
       </Link>
     </Grid>
+    <Grid item>
+      <Link to="/signup">
+        <Button variant="contained">Sign up</Button>
+      </Link>
+    </Grid>
   </Grid>
 )
 
