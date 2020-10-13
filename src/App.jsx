@@ -20,15 +20,15 @@ const Wrapper = styled.div`
   flex-direction: column;
 `
 
-const PagesContainer = styled.div`
+const PagesContainer = styled(Container)`
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 `
 
 const Pages = ({ children }) => (
   <PagesContainer>
-    <Container style={{ height: '100%' }}>
-      <Switch>{children}</Switch>
-    </Container>
+    <Switch>{children}</Switch>
   </PagesContainer>
 )
 
