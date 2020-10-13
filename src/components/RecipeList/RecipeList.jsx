@@ -8,6 +8,7 @@ const RecipeList = ({ recipes }) => (
     {recipes.map((recipe) => (
       <Grid item key={recipe.id} xs={12} md={6} lg={4}>
         <RecipeCard
+          id={recipe.id}
           title={recipe.title}
           author={recipe.author}
           image={recipe.image}

@@ -6,6 +6,7 @@ import {
   CardMedia,
   CardContent,
 } from '@material-ui/core'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
@@ -24,10 +25,13 @@ const CardDescription = styled(CardContent)`
   flex-grow: 1;
 `
 
-const Header = ({ title, author, time }) => (
-  <CardHeader title={title} subheader={`${time} mins by ${author}`} />
+const Header = ({ id, title, author, time }) => (
+  <Link to={`/recipes/${id}`}>
+    <CardHeader title={title} subheader={`${time} mins by ${author}`} />
+  </Link>
 )
 Header.propTypes = {
+  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
   time: PropTypes.number.isRequired,
@@ -44,14 +48,15 @@ RecipeDescription.propTypes = {
   description: PropTypes.string.isRequired,
 }
 
-const RecipeCard = ({ title, author, image, description, time }) => (
+const RecipeCard = ({ id, title, author, image, description, time }) => (
   <Container>
-    <Header title={title} author={author} time={time} />
+    <Header id={id} title={title} author={author} time={time} />
     <Image image={image} title={title} />
     <RecipeDescription description={description} />
   </Container>
 )
 RecipeCard.propTypes = {
+  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
