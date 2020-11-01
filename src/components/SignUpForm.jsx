@@ -63,7 +63,7 @@ const SignUpForm = ({ redirectTo }) => {
       </FormInputs>
       <FormActions>
         <Button variant="contained" color="primary" onClick={handleSubmit}>
-          Sign in
+          Sign up
         </Button>
       </FormActions>
     </Form>
