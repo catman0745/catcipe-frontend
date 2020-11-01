@@ -35,7 +35,6 @@ const SignInForm = ({ redirectTo }) => {
     const user = { username, password }
     const clientSideValidationErrors = validate(user, clientSideValidationRules)
     if (Object.keys(clientSideValidationErrors).length !== 0) {
-      console.log(clientSideValidationErrors)
       setValidationErrors(clientSideValidationErrors)
       return
     }
