@@ -5,10 +5,16 @@ import PropTypes from 'prop-types'
 import Form, { FormField, FormInputs, FormActions } from './Form'
 import { signIn, signUp } from '../api'
 import { store, actions } from '../redux'
+import validate from '../utils/validate'
 
 const setCurrentUser = (username, token) => {
   localStorage.setItem('userSession', JSON.stringify({ username, token }))
   store.dispatch(actions.setCurrentUser(username, token))
+}
+
+const clientSideValidationRules = {
+  username: { type: 'string', maxLength: 30 },
+  password: { type: 'string', maxLength: 30 },
 }
 
 const SignUpForm = ({ redirectTo }) => {
@@ -26,10 +32,17 @@ const SignUpForm = ({ redirectTo }) => {
   }, [password])
 
   const handleSubmit = async () => {
-    const result = await signUp({ username, password })
+    const user = { username, password }
+    const clientSideValidationErrors = validate(user, clientSideValidationRules)
+    if (Object.keys(clientSideValidationErrors).length !== 0) {
+      setValidationErrors(clientSideValidationErrors)
+      return
+    }
+
+    const result = await signUp(user)
     if (result.success) {
       store.dispatch(actions.showAlert('success', 'Signed up successfully'))
-      const { token } = await signIn({ username, password })
+      const { token } = await signIn(user)
       setCurrentUser(username, token)
       history.push(redirectTo)
     } else if (result.validationErrors) {
