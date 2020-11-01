@@ -30,6 +30,7 @@
     ],
     "react/prop-types": ["error", { "ignore": ["children"] }],
     "no-lonely-if": "off",
-    "valid-typeof": "off"
+    "valid-typeof": "off",
+    "no-underscore-dangle": "off"
   }
 }
