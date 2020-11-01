@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { TextField, Button } from '@material-ui/core'
+import Button from '@material-ui/core/Button'
 import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import Form, { FormInputs, FormActions } from './Form'
+import Form, { FormField, FormInputs, FormActions } from './Form'
 import { signIn, signUp } from '../api'
 import { store, actions } from '../redux'
 
@@ -45,14 +45,14 @@ const SignUpForm = ({ redirectTo }) => {
   return (
     <Form title="Sign up">
       <FormInputs>
-        <TextField
+        <FormField
           error={!!validationErrors.username}
           helperText={validationErrors.username}
           required
           label="username"
           onChange={(e) => setUsername(e.target.value)}
         />
-        <TextField
+        <FormField
           error={!!validationErrors.password}
           helperText={validationErrors.password}
           required
